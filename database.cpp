@@ -5,26 +5,6 @@
 #include <cstring>
 #include "database.h"
 
-// enum Type { INT, DOUBLE, STRING, ARRAY };
-
-// struct Array {
-//   int size;
-//   Type type;
-//   void *items;
-// };
-
-// struct Entry {
-//   Type type;
-//   std::string key;
-//   void *value;
-// };
-
-// struct Database {
-//   Entry **entries; // Entry pointer array
-//   int size; // The number of entries.
-//   int capacity; // The 'maximum number of entries' that the program can hold.
-// };
-
 /**
  * 1. We have to know the type, key(string), and value.
  * 2. Assume that wrong type cannot pass through.
@@ -38,23 +18,28 @@ Entry *create(Type type, std::string key, void *value) {
     return entry;
 }
 
-/**
- * WIP
-*/
 void init(Database &database) { // Don't run this multiple times.
     database.size = 0; // Size means the number of entries.
     database.capacity = 10; // Capacity means the 'maximum number of entries' that the program can hold.
-    database.entries = new Entry *[database.capacity]; // Makes 'Entry pointer array' with size of database.capacity.
+    database.entries = new Entry *[database.capacity]; // Makes 'Entry Pointer Array' with size of database.capacity.
 }
 
-/**
- * WIP
-*/
 void add(Database &database, Entry *entry) {
-    // When it's too big.
+    // Check if the key already exists.
+    // Replacing does not costs any size or capacity. so, we don't have to check the capacity.
+    for (int i = 0; i < database.size; i++) {
+        if (database.entries[i]->key == entry->key) {
+            // If the key exists, replace the entry.
+            delete database.entries[i];
+            database.entries[i] = entry;
+            return; // Works same as 'break'.
+        }
+    }
+    
+    // If capacity is running out, we have to double it.
     if (database.size == database.capacity) {
-        database.capacity *= 2; // Fix this.
-        Entry **tmpEntries = new Entry *[database.capacity]; // A new array with *Entry.
+        database.capacity *= 2; // database.capacity++; is VERY INEFFICIENT. DO NOT RUN THIS OFTEN.
+        Entry **tmpEntries = new Entry *[database.capacity]; // A new Entry array.
 
         for (int i = 0; i < database.size; i++) { // Copy and paste.
             tmpEntries[i] = database.entries[i];
@@ -64,7 +49,7 @@ void add(Database &database, Entry *entry) {
         database.entries = tmpEntries; // Replace with the new one.
     }
 
-    // Add new entry.
+    // Add new entry & size + 1
     database.entries[database.size++] = entry;
 }
 

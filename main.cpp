@@ -17,7 +17,7 @@ int main() {
         std::cout << "command (list, add, get, del, exit): ";
         std::cin >> userInputCommand;
 
-        if (userInputCommand == "list") { // ○
+        if (userInputCommand == "list") { // ●
             list(*database);
 
         } else if (userInputCommand == "add") { // ○
