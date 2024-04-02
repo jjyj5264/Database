@@ -115,7 +115,7 @@ int main() {
                         if (arr[i]->type == INT) {
                             int *subArr = new int[arr[i]->size];
                             for (int j = 0; j < arr[i]->size; j++) {
-                                std::cout << "item[" << i << "][" << j << "]: ";
+                                std::cout << "item[" << j << "]: ";
                                 std::cin >> subArr[j];
                             }
                             arr[i]->items = subArr;
@@ -123,14 +123,14 @@ int main() {
                             double *subArr = new double[arr[i]->size];
                             for (int j = 0; j < arr[i]->size; j++)
                             {
-                                std::cout << "item[" << i << "][" << j << "]: ";
+                                std::cout << "item[" << j << "]: ";
                                 std::cin >> subArr[j];
                             }
                             arr[i]->items = subArr;
                         } else if (arr[i]->type == STRING) {
                             std::string *subArr = new std::string[arr[i]->size];
                             for (int j = 0; j < arr[i]->size; j++) {
-                                std::cout << "item[" << i << "][" << j << "]: ";
+                                std::cout << "item[" << j << "]: ";
                                 std::getline(std::cin >> std::ws, subArr[j]);
                             }
                             arr[i]->items = subArr;
