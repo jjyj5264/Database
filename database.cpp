@@ -5,10 +5,6 @@
 #include <cstring>
 #include "database.h"
 
-/**
- * 1. We have to know the type, key(string), and value.
- * 2. Assume that wrong type cannot pass through.
-*/
 Entry *create(Type type, std::string key, void *value) {
     Entry *entry = new Entry;
     entry->type = type;
@@ -89,7 +85,6 @@ void list(Database &database) {
         printEntry(database.entries[i]);
     }
     std::cout << "size: " << database.size << std::endl;
-    std::cout << "void list();" << std::endl;
 }
 
 void printEntry(Entry *entry) {
@@ -109,7 +104,6 @@ void printEntry(Entry *entry) {
         // Do something...
         break;
     }
-    std::cout << "void printEntry();" << std::endl;
 
     std::cout << std::endl;
 }
