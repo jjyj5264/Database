@@ -97,6 +97,46 @@ int main() {
 
                     Array **arr = new Array *[array->size];
 
+                    for (int i = 0; i < array->size; i++) { // array->size: size of the *SUPERSET*.
+                        std::cout << "item[" << i << "]: ";
+                        std::cout << "type (int, double, string, array): ";
+                        std::cin >> userInputType; // Type of the *SUBSET*.
+                        if (userInputType == "int") { currentType = INT; }
+                        if (userInputType == "double") { currentType = DOUBLE; }
+                        if (userInputType == "string") { currentType = STRING; }
+                        std::cout << "size: "; // Size of the *SUBSET*.
+                        std::cin >> userInputSize;
+
+                        // Init
+                        arr[i] = new Array; // *NOTICE : arr[i] IS A SUBSET*
+                        arr[i]->type = currentType; // Can't be ARRAY in this case too.
+                        arr[i]->size = userInputSize;
+
+                        if (arr[i]->type == INT) {
+                            int *subArr = new int[arr[i]->size];
+                            for (int j = 0; j < arr[i]->size; j++) {
+                                std::cout << "item[" << i << "][" << j << "]: ";
+                                std::cin >> subArr[j];
+                            }
+                            arr[i]->items = subArr;
+                        } else if (arr[i]->type == DOUBLE) {
+                            double *subArr = new double[arr[i]->size];
+                            for (int j = 0; j < arr[i]->size; j++)
+                            {
+                                std::cout << "item[" << i << "][" << j << "]: ";
+                                std::cin >> subArr[j];
+                            }
+                            arr[i]->items = subArr;
+                        } else if (arr[i]->type == STRING) {
+                            std::string *subArr = new std::string[arr[i]->size];
+                            for (int j = 0; j < arr[i]->size; j++) {
+                                std::cout << "item[" << i << "][" << j << "]: ";
+                                std::getline(std::cin >> std::ws, subArr[j]);
+                            }
+                            arr[i]->items = subArr;
+                        }
+                    }
+
                     array->items = arr;
                     add(*database, create(ARRAY, userInputKey, array));
                 }

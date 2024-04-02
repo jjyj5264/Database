@@ -84,7 +84,7 @@ void list(Database &database) {
     for (int i = 0; i < database.size; i++) { // If the size equals to 0; runs printEntry 0 times.
         printEntry(database.entries[i]);
     }
-    std::cout << "size: " << database.size << std::endl;
+    // std::cout << "size: " << database.size << std::endl;
 }
 
 void printArray(Array *array) {
@@ -100,6 +100,15 @@ void printArray(Array *array) {
             break;
         case STRING:
             std::cout << "\"" << ((std::string *)array->items)[i] << "\"";
+            break;
+        case ARRAY:
+            /**
+             * array: array points the 'Array instance'.
+             * items: in this case, items points 'array of Array structure'.
+             * [i]: i-th Array pointer.
+             * ((Array **)array->items)[i]: casts array->items to array of Array pointer. and calls i-th index.
+            */
+            printArray(((Array **)array->items)[i]); // Recursive call.
             break;
         }
 
