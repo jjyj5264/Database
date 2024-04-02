@@ -87,6 +87,30 @@ void list(Database &database) {
     std::cout << "size: " << database.size << std::endl;
 }
 
+void printArray(Array *array) {
+    std::cout << "[";
+
+    for (int i = 0; i < array->size; i++) {
+        switch (array->type) {
+        case INT:
+            std::cout << ((int *)array->items)[i];
+            break;
+        case DOUBLE:
+            std::cout << ((double *)array->items)[i];
+            break;
+        case STRING:
+            std::cout << "\"" << ((std::string *)array->items)[i] << "\"";
+            break;
+        }
+
+        if (i < array->size - 1) {
+            std::cout << ", ";
+        }
+    }
+    
+    std::cout << "]";
+}
+
 void printEntry(Entry *entry) {
     std::cout << entry->key + ": ";
 
@@ -101,7 +125,7 @@ void printEntry(Entry *entry) {
         std::cout << "\"" << *(std::string *)entry->value << "\"";
         break;
     case ARRAY:
-        // Do something...
+        printArray((Array *)entry->value);
         break;
     }
 

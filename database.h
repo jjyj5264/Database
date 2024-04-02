@@ -41,8 +41,8 @@ void remove(Database &database, std::string &key);
 // 데이터베이스를 해제한다.
 void destroy(Database &database);
 
-// 내가만든것들*원래있던거아님*이거관리해줘야함
 void list(Database &database);
 void printEntry(Entry *entry);
+void printArray(Array *array);
 
 #endif
